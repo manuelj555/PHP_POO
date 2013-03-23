@@ -104,6 +104,12 @@ Hemos extendido la clase Persona en la clase Vendedor, por lo tanto podemos acce
     echo "trabaja desde las $desde horas hasta las $hasta"; //imprime trabaja desde las 08:00 horas hasta las 17:00
     echo $vendedor->getHorasDiarias(); //imprime 8
 
+Sobreescribiendo métodos:
+-----
+
+Extendiendo métodos:
+-----
+
 Fuentes:
 -------
 
