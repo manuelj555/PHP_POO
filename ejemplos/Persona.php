@@ -43,7 +43,7 @@ class Persona
      */
     public function setNombres($nombres)
     {
-        $this->nombres = ucwords($nombres);
+        $this->nombres = ucwords(strtolower($nombres));
         return $this;
     }
 

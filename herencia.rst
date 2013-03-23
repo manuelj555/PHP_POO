@@ -83,26 +83,31 @@ Hemos extendido la clase Persona en la clase Vendedor, por lo tanto podemos acce
 
     $cliente = new Persona();
 
-    $cliente->setNombres("manuel aguirre");
-    $cliente->setCumpleanos(new DateTime('08-11-1988'));
+    $cliente->setNombres("manuel aguirre")
+            ->setCumpleanos(new DateTime('08-11-1988'));
 
-    echo $cliente->getNombres(); //imprime Manuel Aguirre
-    echo $cliente->getCumpleanos(); //imprime 08-11-1988
-    echo $cliente->getEdad(); //imprime 24 (Para Marzo de 2013)
+    echo($cliente->getNombres()); //imprime Manuel Aguirre
+    echo($cliente->getCumpleanosString()); // imprime 08-11-1988
+    echo($cliente->getEdad()); // imprime 24
+    echo("Nació el ". $cliente->getCumpleanos()->format('d \d\e\l \m\e\s m \d\e Y') . '<br/><br/>'); 
+    // imprime Nació el 08 del mes 11 de 1988
 
     $vendedor = new Vendedor();
-    $vendedor->setNombres("manuel aguirre"); //podemos acceder a los métodos publicos de la clase Padre (Persona)
-    $vendedor->setCumpleanos(new DateTime('08-11-1988'));
-    $vendedor->setFechaIngreso(new DateTime('10-10-2010')); //y por supuesto, a los métodos publicos de la propia clase
-    $vendedor->seTurno(new DateTime('08:00'), new DateTime('17:00'));
 
-    echo $vendedor->getNombres(); //imprime Manuel Aguirre
-    echo $vendedor->getCumpleanos(); //imprime 08-11-1988
-    echo $vendedor->getEdad(); //imprime 24 (Para Marzo de 2013)
-    echo $vendedor->getFechaIngreso(); //imprime 10-10-2010
-    list($desde, $hasta) = $vendedor->getTurno();
-    echo "trabaja desde las $desde horas hasta las $hasta"; //imprime trabaja desde las 08:00 horas hasta las 17:00
-    echo $vendedor->getHorasDiarias(); //imprime 8
+    $vendedor->setNombres("pedro perez")
+            ->setCumpleanos(new DateTime('10-10-1990'));
+
+    $vendedor->setFechaIngreso(new DateTime('05-12-2010'));
+    $vendedor->setTurno(new DateTime('08:00'), new DateTime('17:00'));
+
+    echo($vendedor->getNombres()); //imprime Pedro Perez
+    echo($vendedor->getCumpleanosString()); //imprime 10-10-1990
+    echo($vendedor->getEdad()); //imprime 22
+    echo($vendedor->getFechaIngreso()->format('d / m / Y')); //imprime 05 / 12 / 2010
+    list($comienzo, $termino) = $vendedor->getTurno();
+    echo("Trabaja desde las {$comienzo->format('H:i')} Horas, hasta las {$termino->format('H:i')} Horas"); 
+    //imprime Trabaja desde las 08:00 Horas, hasta las 17:00 Horas
+    echo($vendedor->getHorasDiarias()); //imprime 9
 
 Sobreescribiendo métodos:
 -----
