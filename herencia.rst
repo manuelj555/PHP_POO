@@ -24,12 +24,21 @@ _______
 
     class Persona
     {
-        protected $nombre;
+        protected $nombres;
         protected $cumpleaños;
         private $edad;
 
-        public function setNombre($nombre){ $this->nombre = $nombre; }
-        public function getNombre(){ return $this->nombre; }
+        public function setNombres($nombres){ $this->nombres = ucwords($nombres); }
+        public function getNombres(){ return $this->nombres; }
+        public function setCumpleaños(DateTime $fecha)
+        { 
+            $this->cumpleaños = $fecha->format('d-m-Y');
+            $this->edad = $fecha->diff(new DateTime('now'))->y; //obtenemos el numero de años entre el cumpleaños y hoy
+        }
+        public function getCumpleaños(){ return $this->cumpleaños; }
+        public function getEdad(){ return $this->edad; }
     }
+
+En el ejemplo anterior hemos creado una clase Persona con tres atributos: nombres, cumpleaños y edad, los dos primeros son protegidos, mientras que el ultimo es privado, esto lo hacemos así debido a que no queremos permitir que el atributo edad puede ser modificado ni desde fuera de la clase ni desde clases que hereden de Persona.
 
 `Fuente <http://www.phpya.com.ar/poo/temarios/descripcion.php?cod=45&punto=11&inicio=0>`_
