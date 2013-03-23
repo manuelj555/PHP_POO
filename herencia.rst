@@ -1,0 +1,2 @@
+Herencia en PHP
+=======
