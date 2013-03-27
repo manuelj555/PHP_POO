@@ -114,6 +114,60 @@ Sobreescribiendo métodos:
 
 Extendiendo métodos:
 -----
+Crearemos una clase que extenderá nuevamente de Persona (igual al ejemplo anterior), pero esta, reescribirá y extenderá el método setCumpleanos de la clase padre, con el fin de agregar más funcionalidad al mismo. 
+
+.. code-block:: php
+
+    <?php
+    
+    class Conductor extends Persona
+    {
+    
+        protected $vehiculo;
+        protected $puedeConducir = false;
+    
+        public function getVehiculo()
+        {
+            return $this->vehiculo;
+        }
+    
+        public function setVehiculo(Vehiculo $vehiculo)
+        {
+            $this->vehiculo = $vehiculo;
+            if ($this->cumpleanos) {
+                $this->setPuedeConducir($this->getEdad() >= $this->vehiculo->edadMinima());
+            }
+        }
+    
+        /**
+         * Volvemos a crear el método con el mismo nombres, y los mismos parametros (Es obligatorio que tenga los mismos parametros)
+         *
+         *
+        public function setCumpleanos(DateTime $cumpleanos)
+        {
+            parent::setCumpleanos($cumpleanos);//llamamos al método de la clase superior usando parent::
+            //ahora escribimos nuestro código adicional que queremos que se ejecute al llamar a nuestro método
+            if ($this->vehiculo) {
+                $this->setPuedeConducir($this->getEdad() >= $this->vehiculo->edadMinima());
+            }
+            return $this;
+        }
+    
+        public function puedeConducir()
+        {
+            return $this->puedeConducir;
+        }
+    
+        protected function setPuedeConducir($puedeConducir)
+        {
+            $this->puedeConducir = $puedeConducir;
+        }
+    
+    }
+
+Como ven es muy sencillo extender métodos en clases derivadas, solo debemos volver a escribirlo y agregar código dentro del mismo, entonces al llamar al método desde alguna instancia de Conductor, se ejecutará el método de la clase hija.
+
+El código de la interfaz Vehiculo se encuentra en: https://github.com/manuelj555/PHP_POO/blob/master/ejemplos/Vehiculo.php
 
 Fuentes:
 -------
