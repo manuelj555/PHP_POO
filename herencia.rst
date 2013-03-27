@@ -142,7 +142,7 @@ Crearemos una clase que extenderá nuevamente de Persona (igual al ejemplo anter
         /**
          * Volvemos a crear el método con el mismo nombres, y los mismos parametros (Es obligatorio que tenga los mismos parametros)
          *
-         *
+         */
         public function setCumpleanos(DateTime $cumpleanos)
         {
             parent::setCumpleanos($cumpleanos);//llamamos al método de la clase superior usando parent::
@@ -168,6 +168,61 @@ Crearemos una clase que extenderá nuevamente de Persona (igual al ejemplo anter
 Como ven es muy sencillo extender métodos en clases derivadas, solo debemos volver a escribirlo y agregar código dentro del mismo, entonces al llamar al método desde alguna instancia de Conductor, se ejecutará el método de la clase hija.
 
 El código de la interfaz Vehiculo se encuentra en: https://github.com/manuelj555/PHP_POO/blob/master/ejemplos/Vehiculo.php
+
+Ahora vemos un ejemplo de uso de la clase Conductor (Usaremos la clase Auto, para pasarla como instancia de Vehiculo al Conductor):
+
+.. code-block:: php
+
+    function irAlTrabajo(Conductor $cond)
+    {
+        if (!$cond->getVehiculo() instanceof Vehiculo) {
+            echo ("El conductor {$cond->getNombres()} No tiene un vehiculo en estos momentos");
+            return;
+        }
+    
+        if (!$cond->puedeConducir()) {
+            echo ("El conductor {$cond->getNombres()} No tiene permitido conducir aun");
+            return;
+        }
+    
+        $cond->getVehiculo()->avanzar(); //comenzamos a avanzar hasta el trabajo
+        echo ("El conductor {$cond->getNombres()} comienza a avanzar hasta el trabajo");
+        echo ("se dirige a una velocidad de {$cond->getVehiculo()->getVelocidad()} Km/Hora");
+        $tipoVehiculo = get_class($cond->getVehiculo());
+        echo ("Va en un/una: {$tipoVehiculo}");
+        $cond->getVehiculo()->detener();
+        echo ("El conductor {$cond->getNombres()} ha llegado al trabajo");
+    }
+    
+    $coche = new Auto();
+    
+    $conductor1 = new Conductor();
+    
+    $conductor1->setNombres("MANUEL AGUIRRE");
+    $conductor1->setCumpleanos(new DateTime('08-11-1988'));
+    
+    $conductor1->setVehiculo($coche);
+    
+    irAlTrabajo($conductor1);
+    
+    $conductor1->setVehiculo( new Bicicleta());
+    
+    irAlTrabajo($conductor1);
+    
+    $nino = new Conductor();
+    
+    $nino->setNombres("Pedro Perez");
+    $nino->setCumpleanos(new DateTime('10-10-2002'));
+    
+    irAlTrabajo($nino);
+    
+    $nino->setVehiculo(new Auto());
+    
+    irAlTrabajo($nino);
+    
+    $nino->setVehiculo(new Bicicleta());
+    
+    irAlTrabajo($nino);
 
 Fuentes:
 -------
